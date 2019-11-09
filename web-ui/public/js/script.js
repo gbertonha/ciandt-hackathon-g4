@@ -17,9 +17,19 @@ function createChart(sensor) {
     var chart = nv.models.lineChart();
 
     chart.xAxis.tickFormat(function(d) {
-      return d3.time.format("%m/%d %H:%M")(new Date((d-(9*3600))*1000));
+      return d3.time.format("%m/%d %H:%M")(new Date((d - 9 * 3600) * 1000));
     });
     chart.yAxis.tickFormat(d3.format(","));
+
+    chart.xAxis.axisLabel("Time");
+
+    if (sensor === "temperature") {
+      chart.yAxis.axisLabel("Temperature");
+    } else if (sensor === "humidity") {
+      chart.yAxis.axisLabel("Humidity");
+    } else if (sensor === "pressure") {
+      chart.yAxis.axisLabel("Pressure");
+    }
 
     var tag = "#" + sensor + " svg";
     d3.select(tag)
