@@ -100,10 +100,11 @@ class Iot(object):
         """
 
         try:
-            key_name = str(datetime.now())
+            cur_time_stamp = datetime.now()
+            key_name = str(cur_time_stamp)
             item = self.database.collection(collection).document(key_name)
             item.set({
-                u'time': key_name,
+                u'time': cur_time_stamp,
                 u'value': value
             }, merge=True)
         except Exception as exception:
