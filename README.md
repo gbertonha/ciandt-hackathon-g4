@@ -163,7 +163,7 @@ After checking on your local computer, you can deploy your application to Fireba
 firebase deploy --only hosting --project [project-id]
 ```
 After deploying, it should be available from the following URL address (depending on your group number):  
-https://ciandt-hackathon-g4.firebaseapp.com  
+https://ciandt-hackathon-g6.firebaseapp.com  
 
 ### Develop python code on Raspberry Pi
  
