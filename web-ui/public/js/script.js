@@ -35,7 +35,6 @@ function createChart(sensor) {
 function convertFirestoreToNvd3(sensor) {
   var valueArray;
   var color;
-  var key = sensor;
   if (sensor === "temperature") {
     valueArray = temperatureData;
     color = "red";
@@ -50,7 +49,7 @@ function convertFirestoreToNvd3(sensor) {
   var resultArray = [
     {
       color: color,
-      key: key,
+      key: sensor,
       values: []
     }
   ];
