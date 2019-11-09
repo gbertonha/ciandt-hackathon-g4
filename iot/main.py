@@ -1,6 +1,6 @@
 """This is the main program"""
 import time
-import datetime
+from datetime import datetime
 
 import RPi.GPIO as GPIO
 
