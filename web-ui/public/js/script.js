@@ -113,18 +113,12 @@ function readData(sensor) {
       createChart("humidity");
       createChart("pressure");
     })
-    .then(() => {
-      console.log("Temp data: ", temperatureData);
-      console.log("Humidity: ", humidityData);
-      console.log("pressure: ", pressureData);
-    });
 }
 
 /**
  * Triggered once DOM is loaded.
  */
 document.addEventListener("DOMContentLoaded", function() {
-  console.log("DOM content loaded");
   try {
     var sensors = ["temperature", "humidity", "pressure"];
     sensors.forEach(function(sensor) {
