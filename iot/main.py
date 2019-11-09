@@ -99,16 +99,13 @@ class Iot(object):
                 value (int): sensor value to be stored
         """
 
-        doc_ref = self.database.collection(collection).stream()
-
         try:
-            for doc in doc_ref:
-                key_name = str(datetime.now())
-                item = self.database.collection(collection).document(key_name)
-                item.set({
-                    u'time': datetime.now(),
-                    u'value': value
-                }, merge=True)
+            key_name = str(datetime.now())
+            item = self.database.collection(collection).document(key_name)
+            item.set({
+                u'time': key_name,
+                u'value': value
+            }, merge=True)
         except Exception as exception:
             print(str(exception))
 
