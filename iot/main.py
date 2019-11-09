@@ -75,9 +75,8 @@ class Iot(object):
 
         try:
             for doc in doc_ref:
-                item = self.database.collection(collection).document(doc.id)
+                item = self.database.collection(collection).document(str(datetime.now()))
                 item.set({
-                    time: datetime.now(),
                     u'value': value
                 }, merge=True)
         except Exception as exception:
