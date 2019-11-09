@@ -1,5 +1,6 @@
 """This is the main program"""
 import time
+import datetime
 
 import RPi.GPIO as GPIO
 
@@ -76,6 +77,7 @@ class Iot(object):
             for doc in doc_ref:
                 item = self.database.collection(collection).document(doc.id)
                 item.set({
+                    time: datetime.now(),
                     u'value': value
                 }, merge=True)
         except Exception as exception:
