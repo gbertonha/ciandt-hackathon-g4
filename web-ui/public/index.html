@@ -19,6 +19,9 @@
 
     <script defer src="js/script.js"></script>
 
+    <!-- Import Bootstrap CDN-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- nvd3.js -->
@@ -76,6 +79,9 @@
             </div>
         </div>
         <span class="updated">Last update: <span id="last-update"></span></span>
+        <button type="button" class="btn btn-primary refresh-button">
+        Refresh Data
+      </button>
     </div>
     <div id="temperature">
         <h3 class="graph-title">Temperature</h3>

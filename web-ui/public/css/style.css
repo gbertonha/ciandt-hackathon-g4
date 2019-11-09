@@ -157,3 +157,8 @@ header h2 {
     color: white;
     text-align: center;
 }
+
+.refresh-button {
+    position: absolute;
+    right: 40px;
+}
