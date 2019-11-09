@@ -75,7 +75,8 @@ class Iot(object):
 
         try:
             for doc in doc_ref:
-                item = self.database.collection(collection).document(str(datetime.now()))
+                key_name = str(datetime.now())
+                item = self.database.collection(collection).document(key_name)
                 item.set({
                     u'value': value
                 }, merge=True)
