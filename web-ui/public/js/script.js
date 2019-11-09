@@ -19,7 +19,8 @@ function createChart(sensor) {
     chart.xAxis.tickFormat(d3.format(",f"));
     chart.yAxis.tickFormat(d3.format(",.2f"));
 
-    d3.select("#chart svg")
+    var tag = "#" + sensor + " svg"
+    d3.select(tag)
       .datum(convertFirestoreToNvd3(sensor))
       .transition()
       .duration(500)
