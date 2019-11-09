@@ -17,7 +17,7 @@ class GoogleHomeController(object):
         self.google_home = next(cc for cc in chromecasts if cc.device.friendly_name == self.device_name)
         self.google_home.wait()
         self.mc = self.google_home.media_controller
-        self.ac_on = true
+        self.ac_on = True
 
     def run(self):
         try:
