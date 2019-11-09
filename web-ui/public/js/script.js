@@ -78,41 +78,56 @@ function readData(sensor) {
   var db = firebase.firestore();
   var collectionRef = db.collection(sensor);
   collectionRef.orderBy("time").limit(50);
-  collectionRef
-    .get()
-    .then(querySnapshot => {
-      querySnapshot.forEach(doc => {
-        // Push to the appropriate array based on the sensor
-        if (sensor === "temperature") {
-          temperatureData.push(doc.data());
-        } else if (sensor === "humidity") {
-          humidityData.push(doc.data());
-        } else if (sensor === "pressure") {
-          pressureData.push(doc.data());
-        }
-        document.getElementById(sensor).innerText = doc.data().value;
-        var today = new Date();
-        var date =
-          today.getFullYear() +
-          "-" +
-          (today.getMonth() + 1) +
-          "-" +
-          today.getDate();
-        var time =
-          today.getHours() +
-          ":" +
-          today.getMinutes() +
-          ":" +
-          today.getSeconds();
-        var dateTime = date + " " + time;
-        document.getElementById("last-update").innerText = dateTime;
-      });
-    })
-    .then(() => {
-      createChart("temperature");
-      createChart("humidity");
-      createChart("pressure");
-    })
+  readSensorData(sensor).then(() => {
+    createChart("temperature");
+    createChart("humidity");
+    createChart("pressure");
+  });
+
+  // It doesn't matter whether this information is rendered after the chart data is created
+  collectionRef.get().then(querySnapshot => {
+    querySnapshot.forEach(doc => {
+      document.getElementById(sensor).innerText = doc.data().value;
+      var today = new Date();
+      var date =
+        today.getFullYear() +
+        "-" +
+        (today.getMonth() + 1) +
+        "-" +
+        today.getDate();
+      var time =
+        today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      var dateTime = date + " " + time;
+      document.getElementById("last-update").innerText = dateTime;
+    });
+  });
+}
+
+function refreshData() {
+  temperatureData = [];
+  humidityData = [];
+  pressureData = [];
+  var sensors = ["temperature", "humidity", "pressure"];
+  sensors.forEach(function(sensor) {
+    readSensorData(sensor);
+  });
+}
+
+function readSensorData(sensor) {
+  var db = firebase.firestore();
+  var collectionRef = db.collection(sensor);
+  collectionRef.orderBy("time").limit(50);
+  return collectionRef.get().then(querySnapshot => {
+    querySnapshot.forEach(doc => {
+      if (sensor === "temperature") {
+        temperatureData.push(doc.data());
+      } else if (sensor === "humidity") {
+        humidityData.push(doc.data());
+      } else if (sensor === "pressure") {
+        pressureData.push(doc.data());
+      }
+    });
+  });
 }
 
 /**
