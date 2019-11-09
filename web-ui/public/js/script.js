@@ -13,6 +13,7 @@ var humidityData = [];
 var pressureData = [];
 
 function createChart(sensor) {
+  d3.selectAll("svg > *").remove();
   nv.addGraph(function() {
     var chart = nv.models.lineChart();
 
@@ -25,10 +26,13 @@ function createChart(sensor) {
 
     if (sensor === "temperature") {
       chart.yAxis.axisLabel("Temperature");
+      chart.forceY([0, 70]);
     } else if (sensor === "humidity") {
       chart.yAxis.axisLabel("Humidity");
+      chart.forceY([0, 180]);
     } else if (sensor === "pressure") {
       chart.yAxis.axisLabel("Pressure");
+      chart.forceY([0, 1500]);
     }
 
     var tag = "#" + sensor + " svg";
@@ -78,29 +82,34 @@ function readData(sensor) {
   var db = firebase.firestore();
   var collectionRef = db.collection(sensor);
   collectionRef.orderBy("time").limit(50);
-  readSensorData(sensor).then(() => {
-    createChart("temperature");
-    createChart("humidity");
-    createChart("pressure");
-  });
+  readSensorData(sensor);
 
   // It doesn't matter whether this information is rendered after the chart data is created
-  collectionRef.get().then(querySnapshot => {
-    querySnapshot.forEach(doc => {
-      document.getElementById(sensor).innerText = doc.data().value;
-      var today = new Date();
-      var date =
-        today.getFullYear() +
-        "-" +
-        (today.getMonth() + 1) +
-        "-" +
-        today.getDate();
-      var time =
-        today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-      var dateTime = date + " " + time;
-      document.getElementById("last-update").innerText = dateTime;
+  collectionRef
+    .get()
+    .then(querySnapshot => {
+      querySnapshot.forEach(doc => {
+        document.getElementById(sensor).innerText = doc.data().value;
+        var today = new Date();
+        var date =
+          today.getFullYear() +
+          "-" +
+          (today.getMonth() + 1) +
+          "-" +
+          today.getDate();
+        var time =
+          today.getHours() +
+          ":" +
+          today.getMinutes() +
+          ":" +
+          today.getSeconds();
+        var dateTime = date + " " + time;
+        document.getElementById("last-update").innerText = dateTime;
+      });
+    })
+    .catch(err => {
+      console.error(err);
     });
-  });
 }
 
 function refreshData() {
@@ -117,17 +126,24 @@ function readSensorData(sensor) {
   var db = firebase.firestore();
   var collectionRef = db.collection(sensor);
   collectionRef.orderBy("time").limit(50);
-  return collectionRef.get().then(querySnapshot => {
-    querySnapshot.forEach(doc => {
-      if (sensor === "temperature") {
-        temperatureData.push(doc.data());
-      } else if (sensor === "humidity") {
-        humidityData.push(doc.data());
-      } else if (sensor === "pressure") {
-        pressureData.push(doc.data());
-      }
+  return collectionRef
+    .get()
+    .then(querySnapshot => {
+      querySnapshot.forEach(doc => {
+        if (sensor === "temperature") {
+          temperatureData.push(doc.data());
+        } else if (sensor === "humidity") {
+          humidityData.push(doc.data());
+        } else if (sensor === "pressure") {
+          pressureData.push(doc.data());
+        }
+      });
+    })
+    .then(() => {
+      createChart("temperature");
+      createChart("humidity");
+      createChart("pressure");
     });
-  });
 }
 
 /**
