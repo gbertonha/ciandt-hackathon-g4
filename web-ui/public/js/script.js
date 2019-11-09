@@ -19,7 +19,7 @@ function createChart(sensor) {
     chart.xAxis.tickFormat(function(d) {
       return d3.time.format("%m/%d %H:%M")(new Date((d-(9*3600))*1000));
     });
-    chart.yAxis.tickFormat(d3.format(",.2f"));
+    chart.yAxis.tickFormat(d3.format(","));
 
     var tag = "#" + sensor + " svg";
     d3.select(tag)
@@ -62,51 +62,6 @@ function convertFirestoreToNvd3(sensor) {
     });
   });
   return resultArray;
-}
-
-function testData() {
-  return [
-    {
-      color: "red",
-      key: "temperature",
-      values: [
-        {
-          x: 1,
-          y: 100
-        },
-        {
-          x: 2,
-          y: 130
-        },
-        {
-          x: 3,
-          y: 90
-        }
-      ]
-    },
-    {
-      color: "blue",
-      key: "humidity",
-      values: [
-        {
-          x: 1,
-          y: 70
-        },
-        {
-          x: 2,
-          y: 60
-        },
-        {
-          x: 3,
-          y: 80
-        },
-        {
-          x: 4,
-          y: 90
-        }
-      ]
-    }
-  ];
 }
 
 function readData(sensor) {
