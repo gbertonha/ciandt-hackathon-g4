@@ -26,10 +26,13 @@ function createChart(sensor) {
 
     if (sensor === "temperature") {
       chart.yAxis.axisLabel("Temperature");
+      chart.forceY([0, 70]);
     } else if (sensor === "humidity") {
       chart.yAxis.axisLabel("Humidity");
+      chart.forceY([0, 180]);
     } else if (sensor === "pressure") {
       chart.yAxis.axisLabel("Pressure");
+      chart.forceY([0, 1500]);
     }
 
     var tag = "#" + sensor + " svg";
