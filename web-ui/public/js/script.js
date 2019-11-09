@@ -16,10 +16,12 @@ function createChart(sensor) {
   nv.addGraph(function() {
     var chart = nv.models.lineChart();
 
-    chart.xAxis.tickFormat(d3.format(",f"));
+    chart.xAxis.tickFormat(function(d) {
+      return d3.time.format("%m/%d %H:%M")(new Date((d-(9*3600))*1000));
+    });
     chart.yAxis.tickFormat(d3.format(",.2f"));
 
-    var tag = "#" + sensor + " svg"
+    var tag = "#" + sensor + " svg";
     d3.select(tag)
       .datum(convertFirestoreToNvd3(sensor))
       .transition()
@@ -145,16 +147,19 @@ function readData(sensor) {
       createChart("temperature");
       createChart("humidity");
       createChart("pressure");
+    })
+    .then(() => {
+      console.log("Temp data: ", temperatureData);
+      console.log("Humidity: ", humidityData);
+      console.log("pressure: ", pressureData);
     });
-  console.log("Temp data: ", temperatureData);
-  console.log("Humidity: ", humidityData);
-  console.log("pressure: ", pressureData);
 }
 
 /**
  * Triggered once DOM is loaded.
  */
 document.addEventListener("DOMContentLoaded", function() {
+  console.log("DOM content loaded");
   try {
     var sensors = ["temperature", "humidity", "pressure"];
     sensors.forEach(function(sensor) {
