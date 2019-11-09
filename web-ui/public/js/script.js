@@ -2,6 +2,9 @@
 /*jslint browser:true */
 "use strict";
 
+
+const temperatureData = {};
+
 /**
  * Reads data from Firestore and updates information
  * displayed on the dashboard

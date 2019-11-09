@@ -78,6 +78,7 @@ class Iot(object):
                 key_name = str(datetime.now())
                 item = self.database.collection(collection).document(key_name)
                 item.set({
+                    u'time': datetime.now(),
                     u'value': value
                 }, merge=True)
         except Exception as exception:

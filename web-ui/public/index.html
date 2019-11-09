@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Welcome to CI&T Hackathon</title>
 
     <!-- update the version number as needed -->
@@ -18,100 +19,120 @@
 
     <script defer src="js/script.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- nvd3.js -->
-    <link href="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.css" rel="stylesheet" type="text/css" />
     <script src="https://d3js.org/d3.v3.min.js"></script>
     <script src="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.js"></script>
     <script type="text/javascript">
+        nv.addGraph(function() {
+            //var chart = nv.models.historicalBarChart();
+            //var chart = nv.models.lineWithFocusChart();
+            var chart = nv.models.lineChart();
 
-      nv.addGraph(function() {
-          //var chart = nv.models.historicalBarChart();
-          //var chart = nv.models.lineWithFocusChart();
-          var chart = nv.models.lineChart();
-  
-          chart.xAxis.tickFormat(d3.format(',f'));
-          chart.yAxis.tickFormat(d3.format(',.2f'));
-  
-          d3.select('#chart svg')
-              .datum(testData())
-              .transition().duration(500)
-              .call(chart);
-  
-          nv.utils.windowResize(chart.update);
-  
-          return chart;
-      });
-  
-      function testData() {
-          return [{color:'red',
-                   key:'hoge',
-                   values: [{x:1,y:100},
-                            {x:2,y:130},
-                            {x:3,y:90},]},
-                  {color:'blue',
-                   key:'hage',
-                   values: [{x:1,y:70},
-                            {x:2,y:60},
-                            {x:3,y:80},
-                            {x:4,y:90}]}];
-      }
-      </script>
-  </head>
-  <body>
+            chart.xAxis.tickFormat(d3.format(",f"));
+            chart.yAxis.tickFormat(d3.format(",.2f"));
+
+            d3.select("#chart svg")
+                .datum(testData())
+                .transition()
+                .duration(500)
+                .call(chart);
+
+            nv.utils.windowResize(chart.update);
+
+            return chart;
+        });
+
+        function testData() {
+            return [{
+                color: "red",
+                key: "hoge",
+                values: [{
+                    x: 1,
+                    y: 100
+                }, {
+                    x: 2,
+                    y: 130
+                }, {
+                    x: 3,
+                    y: 90
+                }]
+            }, {
+                color: "blue",
+                key: "hage",
+                values: [{
+                    x: 1,
+                    y: 70
+                }, {
+                    x: 2,
+                    y: 60
+                }, {
+                    x: 3,
+                    y: 80
+                }, {
+                    x: 4,
+                    y: 90
+                }]
+            }];
+        }
+    </script>
+</head>
+
+<body>
     <div class="container">
-      <header>
-        <img width="100" alt="CI&T" title="CI&T" src="img/ciandt.png" />
-        <h1>Change the world with IoT</h1>
-        <h2>Group 4</h2>
-      </header>
-      
-      <div class="row">
-        <div class="first column temperature">
-          <div class="sensor-card">
-            <div class="current-container">
-              <span id="temperature" class="current-value">0</span>
-              <span class="unit">°C</span>
-            </div>
-            <div class="icon">
-              <span class="i">&#xf055;</span>
-              <span class="type">TEMP</span>
-            </div>
-          </div>
-        </div> 
+        <header>
+            <img width="100" alt="CI&T" title="CI&T" src="img/ciandt.png" />
+            <h1>Change the world with IoT</h1>
+            <h2>Group 4</h2>
+        </header>
 
-        <div class="column humidity">
-          <div class="sensor-card">
-            <div class="current-container">
-              <span id="humidity" class="current-value">0</span>
-              <span class="unit">%</span>
+        <div class="row">
+            <div class="first column temperature">
+                <div class="sensor-card">
+                    <div class="current-container">
+                        <span id="temperature" class="current-value">0</span>
+                        <span class="unit">°C</span>
+                    </div>
+                    <div class="icon">
+                        <span class="i">&#xf055;</span>
+                        <span class="type">TEMP</span>
+                    </div>
+                </div>
             </div>
-            <div class="icon">
-              <span class="i">&#xf07a;</span>
-              <span class="type">HUMIDITY</span>
-            </div>
-          </div>
-        </div> 
 
-        <div class="column pressure">
-          <div class="sensor-card">
-            <div class="current-container">
-              <span id="pressure" class="current-value">0</span>
-              <span class="unit">hPa</span>
+            <div class="column humidity">
+                <div class="sensor-card">
+                    <div class="current-container">
+                        <span id="humidity" class="current-value">0</span>
+                        <span class="unit">%</span>
+                    </div>
+                    <div class="icon">
+                        <span class="i">&#xf07a;</span>
+                        <span class="type">HUMIDITY</span>
+                    </div>
+                </div>
             </div>
-            <div class="icon">
-              <span class="i">&#xf079;</span>
-              <span class="type">PRESSURE</span>
-            </div>
-          </div>
-        </div> 
 
-      </div>
-      <span class="updated">Last update: <span id="last-update"></span></span>
+            <div class="column pressure">
+                <div class="sensor-card">
+                    <div class="current-container">
+                        <span id="pressure" class="current-value">0</span>
+                        <span class="unit">hPa</span>
+                    </div>
+                    <div class="icon">
+                        <span class="i">&#xf079;</span>
+                        <span class="type">PRESSURE</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <span class="updated">Last update: <span id="last-update"></span></span>
     </div>
     <div id="chart">
-      <svg style="height:500px;" />
+        <svg style="height:500px;"></svg>
     </div>
-  </body>
+</body>
+
 </html>
