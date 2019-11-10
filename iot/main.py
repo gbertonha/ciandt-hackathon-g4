@@ -1,5 +1,6 @@
 """This is the main program"""
 import time
+from datetime import datetime
 
 import RPi.GPIO as GPIO
 
@@ -24,6 +25,11 @@ class Iot(object):
     temperatureAndHumidityPin = 18
     bmp = BMP085(0x77)
 
+    TEMPERATURE_THRESHOLD_LOW = 21
+    TEMPERATURE_THRESHOLD_HIGH = 25
+    TIMES_THRESHOLD = 1
+    MAX_TIMES = 10000
+
     def __init__(self):
         # setup
         GPIO.setmode(GPIO.BCM)
@@ -31,6 +37,8 @@ class Iot(object):
         cred = credentials.Certificate('key.json')
         firebase_admin.initialize_app(cred)
         self.database = firestore.client()
+        self.times = 0
+        self.ac_on = True
 
     def temperature_and_humidity_sensor(self):
         """This method gets the temperature and humidity values
@@ -44,8 +52,29 @@ class Iot(object):
         print(temperature)
         if temperature is not None:
             self.send_to_firestore('temperature', round(temperature, 2))
+
+        if temperature is not None and \
+           (temperature >= self.TEMPERATURE_THRESHOLD_LOW and temperature <= self.TEMPERATURE_THRESHOLD_HIGH):
+            self.times += 1
+            if (self.times == self.MAX_TIMES):
+                self.times = 0
+
+        if self.times > self.TIMES_THRESHOLD:
+            if (self.ac_on == True):
+                print("send turn off message: 1")
+                self.send_to_firestore('turn_off_msg', 1)
+                self.ac_on = False
+                self.times = 0
+            else:
+                print("send turn off message: 0")
+                self.send_to_firestore('turn_off_msg', 0)
+        else:
+            print("send turn off message: 0")
+            self.send_to_firestore('turn_off_msg', 0)
+
         if humidity is not None:
             self.send_to_firestore('humidity', round(humidity, 2))
+
 
     def pressure_sensor(self):
         """This method gets the pressure value
@@ -70,14 +99,14 @@ class Iot(object):
                 value (int): sensor value to be stored
         """
 
-        doc_ref = self.database.collection(collection).stream()
-
         try:
-            for doc in doc_ref:
-                item = self.database.collection(collection).document(doc.id)
-                item.set({
-                    u'value': value
-                }, merge=True)
+            cur_time_stamp = datetime.now()
+            key_name = str(cur_time_stamp)
+            item = self.database.collection(collection).document(key_name)
+            item.set({
+                u'time': cur_time_stamp,
+                u'value': value
+            }, merge=True)
         except Exception as exception:
             print(str(exception))
 

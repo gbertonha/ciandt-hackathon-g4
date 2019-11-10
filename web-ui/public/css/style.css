@@ -1,54 +1,55 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300, 400, 700);
 @import url(https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css);
-
 body {
-  background: linear-gradient(90deg, #7474BF 10%, #348AC7 90%);
+    background: linear-gradient(90deg, #7474bf 10%, #348ac7 90%);
+    font: normal 20px Verdana, Arial, sans-serif;
 }
 
 header {
-  font-size: 24px; 
-  width: 100%; 
-  height: 100px; 
-  background: white; 
-  position: fixed;
-  text-align: center;
-  top: 0;
-  left: 0;
-  -webkit-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
-  -moz-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
-  box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
-  z-index: 1000;
+    font-size: 24px;
+    width: 100%;
+    height: 100px;
+    background: white;
+    position: fixed;
+    text-align: center;
+    top: 0;
+    left: 0;
+    -webkit-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+    -moz-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+    box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+    z-index: 1000;
 }
 
 header img {
-  text-transform: uppercase;
-  line-height: 50px;
-  float: left;
-  padding-left: 25px;
-  margin-top: 30px;
+    text-transform: uppercase;
+    line-height: 50px;
+    float: left;
+    padding-left: 25px;
+    margin-top: 30px;
 }
 
 header h1,
 header h2 {
-  font-weight: 500;
-  letter-spacing: -2px;
-  font-family: 'Open Sans';
-  line-height: 100px;
-  margin: 0px 0px 0px 15px;
-  padding: 0px;
-  font-size: 40px;
+    font-weight: 500;
+    letter-spacing: -2px;
+    font-family: "Open Sans";
+    line-height: 100px;
+    margin: 0px 0px 0px 15px;
+    padding: 0px;
+    font-size: 40px;
 }
 
 header h1 {
-  float: left;
-  color: #000;
+    float: left;
+    color: #000;
 }
 
 header h2 {
-  float: right;
-  margin-right: 20px;
-  color: #d51e49;
+    float: right;
+    margin-right: 20px;
+    color: #d51e49;
 }
+
 
 /* 
   ##Device = Most of the Smartphones Mobiles (Portrait)
@@ -56,95 +57,108 @@ header h2 {
 */
 
 @media only screen and (max-width: 750px) {
-  
-  header h1,
-  header h2 {
-    font-size: 24px;
-    letter-spacing: -2px;
-  }
-  
+    header h1,
+    header h2 {
+        font-size: 24px;
+        letter-spacing: -2px;
+    }
 }
 
 .container {
-  max-width: 1240px;
-  padding-top: 110px;
-  margin: auto;
+    max-width: 1240px;
+    padding-top: 110px;
+    margin: auto;
 }
 
 .row {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-  margin:0 -15px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0 -15px;
 }
 
 .column {
-  display: flex;
-  flex-direction: column;
-  flex-basis: 100%;
-  flex: 1;
-  padding: 15px;
-  text-align: center;
-}
-  
-.sensor-card{
-  width: 360px;
-  height: 180px;
-  font-family: 'Open Sans';
-  position: relative;
-}
-.current-container{
-  width: 180px;
-  height: 180px;
-  background: rgb(41, 41, 41);
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-.icon{
-  width: 180px;
-  height: 180px;
-  background: rgb(237, 237, 237);
-  margin: 0;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-.current-value{
-  font-size: 60px;
-  text-align: center;
-  display: block;
-  font-weight: 300;
-  color: rgb(241, 255, 23);
-  padding: 20px 0 0;
-}
-.unit{
-  color: rgb(52, 198, 235);
-  font-size: 40px;
-  display: block;
-}
-.icon span.i{
-  font-family: weathericons;
-  font-size: 70px;
-  display: block;
-  padding: 15px 0 0;
-  text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+    padding: 15px;
+    text-align: center;
 }
 
-.icon span.type{
-  color: rgb(0, 0, 0);
-  text-align: center;
-  text-transform: uppercase;
-  font-weight: 650;
-  font-size: 26px;
-  display: block;
+.sensor-card {
+    width: 360px;
+    height: 180px;
+    font-family: "Open Sans";
+    position: relative;
+}
+
+.current-container {
+    width: 180px;
+    height: 180px;
+    background: rgb(41, 41, 41);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.icon {
+    width: 180px;
+    height: 180px;
+    background: rgb(237, 237, 237);
+    margin: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.current-value {
+    font-size: 60px;
+    text-align: center;
+    display: block;
+    font-weight: 300;
+    color: rgb(241, 255, 23);
+    padding: 20px 0 0;
+}
+
+.unit {
+    color: rgb(52, 198, 235);
+    font-size: 40px;
+    display: block;
+}
+
+.icon span.i {
+    font-family: weathericons;
+    font-size: 70px;
+    display: block;
+    padding: 15px 0 0;
+    text-align: center;
+}
+
+.icon span.type {
+    color: rgb(0, 0, 0);
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 650;
+    font-size: 26px;
+    display: block;
 }
 
 .updated {
-  color: rgb(241, 255, 23);
-  font-family: 'Open Sans';
-  margin: 0px 0px 0px 15px;
-  padding: 0px;
-  font-size: 20px;
+    color: rgb(241, 255, 23);
+    font-family: "Open Sans";
+    margin: 0px 0px 0px 15px;
+    padding: 0px;
+    font-size: 20px;
+}
+
+.graph-title {
+    color: white;
+    text-align: center;
+}
+
+.refresh-button {
+    position: absolute;
+    right: 40px;
 }
